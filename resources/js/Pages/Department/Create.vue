@@ -1,0 +1,74 @@
+<script setup>
+import Container from "../../Components/Container.vue";
+import Title from "../../Components/Title.vue";
+import InputField from "../../Components/InputField.vue";
+import PrimaryBtn from "../../Components/PrimaryBtn.vue";
+import { useForm } from "@inertiajs/vue3";
+import {Head} from "@inertiajs/vue3";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
+
+const props = defineProps({ programs: Object });
+
+   
+// Initialize the form
+const form = useForm({
+    name: null,
+    program_id: '', // Selected program ID
+});
+
+</script>
+
+
+<template>
+    
+    <!--<Head title="- New Department" />-->
+  
+    <div class="flex items-center justify-center mx-auto">
+        <h1 class="mx-auto text-4xl font-bold text-blue-600 mb-6">Create Department</h1>
+    </div>
+    <div class="flex items-center justify-center mx-auto">
+        <!--<ErrorMessages :errors="form.errors" />-->
+        <div id="second" class="flex flex-col space-y-6">
+            <form
+            @submit.prevent="form.post(route('departments.store'))"
+
+                class="grid grid-cols-2 gap-6"
+                >
+                <div class="flex flex-col space-y-6">
+                    <div>
+                        <InputField
+                            label="Name"
+                            icon="heading"
+                            placeholder="Name of Department"
+                            v-model="form.name"
+                        />
+                    </div>
+
+                    <label for="program_id">Program</label>
+                    <select 
+                    id="program_id" 
+                    v-model="form.program_id" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                    <option value="">Select a program</option>
+                    <option v-for="program in programs" :key="program.id" :value="program.id">
+                        {{ program.id }}
+                    </option>
+                    </select>
+
+                    <div>
+                        <button
+                            @click="submitForm"
+                            :disabled="form.processing"
+                            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</template>
