@@ -38,16 +38,24 @@
                 <tbody class="divide-y divide-gray-200">
                   <tr justify-content-center>
                     <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                      {{ userTimePeriodCounts.today }}
+                      <Link :href="route('reports.today')">
+                        {{ userTimePeriodCounts.today }}
+                      </Link>
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500">
-                      {{ userTimePeriodCounts.this_week }}
+                      <Link :href="route('reports.this-week')">
+                        {{ userTimePeriodCounts.this_week }}
+                      </Link>
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500">
-                      {{ userTimePeriodCounts.current_month }}
+                      <Link :href="route('reports.this-month')">
+                        {{ userTimePeriodCounts.current_month }}
+                      </Link>
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500">
-                      {{ userTimePeriodCounts.current_year }}
+                      <Link :href="route('reports.this-year')">
+                        {{ userTimePeriodCounts.current_year }}
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
@@ -112,17 +120,14 @@
                 </tbody>
               </table>
           </div>
-        </div>
-      
-      
+        </div>       
     </div>
-
-   
     </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import PieChart from '@/Components/Charts/PieChart.vue';
 
 const props = defineProps({

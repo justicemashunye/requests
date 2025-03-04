@@ -26,7 +26,6 @@ Route::resource('positions',PositionController::class);
 
 
 
-
 Route::post('/requisitions/{requisition}/approveProcurement', [SupervisorApprovalController::class, 'approveProcurement'])->name('requisitions.approveProcurement');
 Route::post('/requisitions/{requisition}/rejectProcurement', [SupervisorApprovalController::class, 'rejectProcurement'])->name('requisitions.rejectProcurement');
 Route::post('/requisitions/{requisition}/approveFinance', [SupervisorApprovalController::class, 'approveFinance'])->name('requisitions.approveFinance');
@@ -70,17 +69,17 @@ Route::get('/reports', [ReportController::class, 'reports'])->name('reports');
 
 
 Route::middleware(['auth', 'verified'])->prefix('/reports')->name('reports.')->group(function () {
-    Route::get('/today', [RequisitionController::class, 'today'])->name('today');
-    Route::get('/this-week', [RequisitionController::class, 'thisWeek'])->name('this-week');
-    Route::get('/this-month', [RequisitionController::class, 'thisMonth'])->name('this-month');
-    Route::get('/this-year', [RequisitionController::class, 'thisYear'])->name('this-year');
+    Route::get('/today', [ReportController::class, 'today'])->name('today');
+    Route::get('/this-week', [ReportController::class, 'thisWeek'])->name('this-week');
+    Route::get('/this-month', [ReportController::class, 'thisMonth'])->name('this-month');
+    Route::get('/this-year', [ReportController::class, 'thisYear'])->name('this-year');
 });
 
 Route::middleware(['auth', 'verified'])->prefix('/reports/department')->name('reports.department')->group(function () {
-    Route::get('/today', [RequisitionController::class, 'today'])->name('today');
-    Route::get('/this-week', [RequisitionController::class, 'thisWeek'])->name('this-week');
-    Route::get('/this-month', [RequisitionController::class, 'thisMonth'])->name('this-month');
-    Route::get('/this-year', [RequisitionController::class, 'thisYear'])->name('this-year');
+    Route::get('/today', [ReportController::class, 'today'])->name('today');
+    Route::get('/this-week', [ReportController::class, 'thisWeek'])->name('this-week');
+    Route::get('/this-month', [ReportController::class, 'thisMonth'])->name('this-month');
+    Route::get('/this-year', [ReportController::class, 'thisYear'])->name('this-year');
 });
 
 });

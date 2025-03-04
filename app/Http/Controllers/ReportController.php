@@ -121,10 +121,10 @@ public function thisWeek(Request $request)
         $requisitions = Requisition::query()
             ->where('user_id', $user->id)
             ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
-            ->with(['user.department', 'department']);
+            ->with(['user.department', 'department'])
+            ->get();
 
-        return Inertia::render('Reports/User/ThisWeek
-        ', [
+        return Inertia::render('Reports/User/ThisWeek', [
             'requisitions' => $requisitions,
         ]);
     }
@@ -134,11 +134,11 @@ public function thisWeek(Request $request)
         $user = $request->user();
         $requisitions = Requisition::query()
             ->where('user_id', $user->id)
-            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
-            ->with(['user.department', 'department']);
+            ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
+            ->with(['user.department', 'department'])
+            ->get();
 
-        return Inertia::render('Reports/User/ThisMonth.vue
-        ', [
+        return Inertia::render('Reports/User/ThisMonth', [
             'requisitions' => $requisitions,
         ]);
     }
@@ -148,11 +148,11 @@ public function thisWeek(Request $request)
         $user = $request->user();
         $requisitions = Requisition::query()
             ->where('user_id', $user->id)
-            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
-            ->with(['user.department', 'department']);
-
-        return Inertia::render('Reports/User/ThisYear.vue
-        ', [
+            ->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()])
+            ->with(['user.department', 'department'])
+            ->get();
+        //dd( $requisitions);
+        return Inertia::render('Reports/User/ThisYear', [
             'requisitions' => $requisitions,
         ]);
     }
